@@ -12,12 +12,16 @@ class User {
     makeObservable(this, {
       name: observable,
       legalAge: observable,
-      setUser:action,
+      setName:action,
+      setLegalAge:action,
     })
   }
 
-  public setUser(name: string, legalAge: boolean) {
+  public setName(name:string) {
     this.name = name;
+  }
+
+  public setLegalAge(legalAge:boolean) {
     this.legalAge = legalAge;
   }
 

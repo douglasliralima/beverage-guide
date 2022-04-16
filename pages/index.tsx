@@ -9,14 +9,11 @@ import { useObserver } from 'mobx-react'
 import { getUserstore } from '../store/user'
 
 const Home: NextPage = () => {
-  const [name, setName] = useState("");
-  const [adultAge, setAdultAge] = useState(false);
   const store = getUserstore();
 
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    store.setUser(name, adultAge)
   }
 
   return useObserver(() => (
@@ -25,8 +22,9 @@ const Home: NextPage = () => {
         <title>Beverage Guide</title>
         <meta name="description" content="Beverage Guide using openbrewerydb" />
       </Head>
-
       <main className={styles.main}>
+
+        {store.name && <h1>{store.name}</h1>}
 
         <form onSubmit={handleSubmit}>
 
@@ -35,8 +33,8 @@ const Home: NextPage = () => {
 
           <input className={styles.input}
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={store.name}
+            onChange={(e) => store.setName(e.target.value)}
             placeholder="Full Name"
           />
 
@@ -45,16 +43,16 @@ const Home: NextPage = () => {
               className={styles.checkbox}
               name="age"
               type="checkbox"
-              checked={adultAge}
-              onChange={(e) => setAdultAge(e.target.checked)} />
+              checked={store.legalAge}
+              onChange={(e) => store.setLegalAge(e.target.checked)} />
             Are you older than 18 years old?
           </label>
 
           <input type="button" value="Enter" className={styles.text + " " + styles.submitButton}
-          style={adultAge && name ? {
-            background: '#5D5FEF'
-          } : {}}/>
-            
+            style={store.name && store.legalAge ? {
+              background: '#5D5FEF'
+            } : {}} />
+
 
         </form>
       </main>
