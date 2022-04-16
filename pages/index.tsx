@@ -1,19 +1,23 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 
 import { FormEvent, useState } from 'react'
 import { useObserver } from 'mobx-react'
 
 import { getUserstore } from '../store/user'
+import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   const store = getUserstore();
+  const router = useRouter()
 
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    console.log("Helloooo world!")
     e.preventDefault();
+    router.push("/beverages");
   }
 
   return useObserver(() => (
@@ -23,8 +27,6 @@ const Home: NextPage = () => {
         <meta name="description" content="Beverage Guide using openbrewerydb" />
       </Head>
       <main className={styles.main}>
-
-        {store.name && <h1>{store.name}</h1>}
 
         <form onSubmit={handleSubmit}>
 
@@ -48,7 +50,7 @@ const Home: NextPage = () => {
             Are you older than 18 years old?
           </label>
 
-          <input type="button" value="Enter" className={styles.text + " " + styles.submitButton}
+          <input type="submit" value="Enter" className={styles.text + " " + styles.submitButton}
             style={store.name && store.legalAge ? {
               background: '#5D5FEF'
             } : {}} />
