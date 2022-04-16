@@ -22,10 +22,6 @@ const Home: NextPage = () => {
 
   return useObserver(() => (
     <div className={styles.container}>
-      <Head>
-        <title>Beverage Guide</title>
-        <meta name="description" content="Beverage Guide using openbrewerydb" />
-      </Head>
       <main className={styles.main}>
 
         <form onSubmit={handleSubmit}>
