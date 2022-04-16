@@ -21,12 +21,15 @@ jobs:
       id: cache-build
       with:
         path: ./*
+        key: ${{ github.sha }}
   
   lint:
     runs-on: ubuntu-latest
+    needs: build
     steps:
     - uses: actions/cache@v2
       id: restore-build
       with:
         path: ./*
+        key: ${{ github.sha }}
     - run: yarn lint
