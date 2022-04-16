@@ -2,11 +2,11 @@ import { observable, action, makeObservable } from 'mobx';
 
 class User {
 
-  name: string | undefined;
+  name: string;
 
   legalAge: boolean;
 
-  constructor(name?: string, legalAge: boolean = false) {
+  constructor(name: string, legalAge: boolean) {
     this.name = name;
     this.legalAge = legalAge
     makeObservable(this, {
@@ -28,9 +28,9 @@ class User {
 }
 
 let userStore: User;
-export function getUserstore() {
+export function getUserstore(name: string = "", legalAge: boolean = false) {
   if (!userStore) {
-    userStore = new User();
+    userStore = new User(name, legalAge);
   }
   return userStore;
 };
