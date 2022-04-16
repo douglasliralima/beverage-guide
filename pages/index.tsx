@@ -12,12 +12,11 @@ const Home: NextPage = () => {
   const [name, setName] = useState("");
   const [adultAge, setAdultAge] = useState(false);
   const store = getUserstore();
-  
+
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     store.setUser(name, adultAge)
-    console.log(store)
   }
 
   return useObserver(() => (
@@ -51,9 +50,11 @@ const Home: NextPage = () => {
             Are you older than 18 years old?
           </label>
 
-          <button>
-            Enter
-          </button>
+          <input type="button" value="Enter" className={styles.text + " " + styles.submitButton}
+          style={adultAge && name ? {
+            background: '#5D5FEF'
+          } : {}}/>
+            
 
         </form>
       </main>
