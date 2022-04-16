@@ -1,9 +1,7 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 
-import { FormEvent, useState } from 'react'
+import { FormEvent } from 'react'
 import { useObserver } from 'mobx-react'
 
 import { getUserstore } from '../store/user'
