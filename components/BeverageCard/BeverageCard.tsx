@@ -11,26 +11,26 @@ const BeverageCard: NextPage<beverage> = (props) => {
     const wrapperRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
+        const handleClickOutside = (event: any, customText: string) => {
+            if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+                if (customText === "add more") {
+                    setCustomText("")
+                }
+                else if (customText === "") {
+                    setCustomText("add more")
+                } else {
+                    setCustomText(customText)
+                }
+                setAddEvent(!addEvent)
+            }
+        };
+
         if(addEvent === true) {
             document.addEventListener("click", (e) => handleClickOutside(e, customText), false);
         } else {
             document.removeEventListener("click", (e) => handleClickOutside(e, customText), false);
         }
     }, [addEvent, customText]);
-
-    const handleClickOutside = (event: any, customText: string) => {
-        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-            if (customText === "add more") {
-                setCustomText("")
-            }
-            else if (customText === "") {
-                setCustomText("add more")
-            } else {
-                setCustomText(customText)
-            }
-            setAddEvent(!addEvent)
-        }
-    };
 
     const handleSubmit = () => {
         if (customText === "add more") {
