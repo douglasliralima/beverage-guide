@@ -48,7 +48,8 @@ const Beverages: NextPage = () => {
             </header>
 
             <main className={styles.beverageMain}>
-                {store.beverages && store.beverages.map((value) => <div style={{border:"1px solid #A1A1AA", display:"inline-block"}}>
+                {store.beverages && store.beverages.map((value) => 
+                <div key={value.id} style={{border:"1px solid #A1A1AA", display:"inline-block"}}>
                     <p>{value.name}</p>
                     <p>{`${value.street} - ${value.country}`}</p>
                     <p>{value.brewery_type}</p>
