@@ -13,7 +13,6 @@ const Home: NextPage = () => {
 
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    console.log("Helloooo world!")
     e.preventDefault();
     router.push("/beverages");
   }
