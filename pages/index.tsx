@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import { FormEvent } from 'react'
-import { Observer, useObserver } from 'mobx-react'
+import { Observer } from 'mobx-react'
 
 import { getUserstore } from '../store/user'
 import styles from '../styles/Home.module.css'

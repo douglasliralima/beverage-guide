@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useObserver } from 'mobx-react';
+import { Observer } from 'mobx-react';
 import type { NextPage } from 'next';
 
 import Link from 'next/link';
@@ -19,41 +19,43 @@ const Beverages: NextPage = () => {
         service.list().then((value) => store.setBeverages(value.data))
     })
 
-    return useObserver(() => (
-        <div>
-            <header className={styles.beverageHeader}>
+    return <Observer>
+        {() => (
+            <div>
+                <header className={styles.beverageHeader}>
 
-                <div className={`${styles.headerReturn} ${styles.inlineDiv}`}>
-                    <Link href="/">
-                        <a>
-                            <div className={styles.imageVector}>
-                                <Image
-                                    src="/pages/beverages/goBack.png"
-                                    width={38.4}
-                                    height={38.4}
-                                    alt="Go back icon"
-                                />
-                            </div>
-                            <span className={styles.headerText} >
-                                Go back
-                            </span>
-                        </a>
-                    </Link>
-                </div>
+                    <div className={`${styles.headerReturn} ${styles.inlineDiv}`}>
+                        <Link href="/">
+                            <a>
+                                <div className={styles.imageVector}>
+                                    <Image
+                                        src="/pages/beverages/goBack.png"
+                                        width={38.4}
+                                        height={38.4}
+                                        alt="Go back icon"
+                                    />
+                                </div>
+                                <span className={styles.headerText} >
+                                    Go back
+                                </span>
+                            </a>
+                        </Link>
+                    </div>
 
-                <div className={`${styles.headerName} ${styles.inlineDiv}`}>
-                    <span className={styles.headerText}>
-                        {store.name}
-                    </span>
-                </div>
-            </header>
+                    <div className={`${styles.headerName} ${styles.inlineDiv}`}>
+                        <span className={styles.headerText}>
+                            {store.name}
+                        </span>
+                    </div>
+                </header>
 
-            <main className={styles.beverageMain}>
-                {store.beverages &&
-                    store.beverages.map((value) => <BeverageCard key={value.id} {...value} />)}
-            </main>
-        </div>
-    ));
+                <main className={styles.beverageMain}>
+                    {store.beverages &&
+                        store.beverages.map((value) => <BeverageCard key={value.id} {...value} />)}
+                </main>
+            </div>
+        )}
+    </Observer>
 }
 
 export default Beverages;
