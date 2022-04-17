@@ -42,7 +42,7 @@ const BeverageCard: NextPage<beverage> = (props) => {
         setAddEvent(!addEvent)
     }
 
-    return <div key={props.id} className={styles.card}>
+    return <div className={styles.card}>
 
         <p className={styles.cardTitle}>
             {props.name}

@@ -50,7 +50,7 @@ const Beverages: NextPage = () => {
 
             <main className={styles.beverageMain}>
                 {store.beverages &&
-                    store.beverages.map((value) => <BeverageCard {...value} />)}
+                    store.beverages.map((value) => <BeverageCard key={value.id} {...value} />)}
             </main>
         </div>
     ));
