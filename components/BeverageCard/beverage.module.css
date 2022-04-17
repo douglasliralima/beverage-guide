@@ -4,4 +4,51 @@
     box-sizing: border-box;
     border-radius: 4px;
     display: inline-block;
+    Width: 382px;
+    Height: 282px;
+    margin: 16px;
+    padding-left: 24px;
+}
+
+.cardTitle {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 150%;
+    display: flex;
+    align-items: flex-end;
+    color: #27272A;
+}
+
+.cardAdress {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #3F3F46;
+}
+
+.cardTags {
+    display: inline-block;
+    background: #F2EC54;
+    border-radius: 99px;
+    width: 130px;
+    height: 32px;
+    margin: 8px 8px;
+    text-align: center;
+}
+
+.tagText {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: #000000;
+    line-height: 200%;
+}
+
+.tagIcon {
+    float: left;
 }
