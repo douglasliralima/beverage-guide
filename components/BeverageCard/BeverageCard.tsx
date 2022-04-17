@@ -1,10 +1,47 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 
 import type { beverage } from '../../store/user';
 import styles from "./beverage.module.css"
 
 const BeverageCard: NextPage<beverage> = (props) => {
+    const [addEvent, setAddEvent] = useState(false);
+    const [customText, setCustomText] = useState("add more");
+    const wrapperRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if(addEvent === true) {
+            document.addEventListener("click", (e) => handleClickOutside(e, customText), false);
+        } else {
+            document.removeEventListener("click", (e) => handleClickOutside(e, customText), false);
+        }
+    }, [addEvent, customText]);
+
+    const handleClickOutside = (event: any, customText: string) => {
+        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+            if (customText === "add more") {
+                setCustomText("")
+            }
+            else if (customText === "") {
+                setCustomText("add more")
+            } else {
+                setCustomText(customText)
+            }
+            setAddEvent(!addEvent)
+        }
+    };
+
+    const handleSubmit = () => {
+        if (customText === "add more") {
+            setCustomText("")
+        }
+        else if (customText === "") {
+            setCustomText("add more")
+        }
+        setAddEvent(!addEvent)
+    }
+
     return <div key={props.id} className={styles.card}>
 
         <p className={styles.cardTitle}>
@@ -60,18 +97,33 @@ const BeverageCard: NextPage<beverage> = (props) => {
                     {props.phone}
                 </span>
             </div>
-            <div className={styles.cardTags}>
+            <div
+                id={`${props.id}-add-tag`}
+                ref={wrapperRef}
+                className={styles.cardTags}
+            >
                 <div className={styles.tagIcon}>
                     <Image
-                        src="/components/beverageCard/more.png"
+                        src={`/components/beverageCard/${addEvent ? "add" : "more"}.png`}
                         width={18}
                         height={16}
                         alt="more icon"
+                        onClick={handleSubmit}
                     />
                 </div>
-                <span className={styles.tagText}>
-                    add more
-                </span>
+                {addEvent ?
+                    <input className={styles.addInput}
+                        value={customText}
+                        onChange={(e) => setCustomText(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                                handleSubmit();
+                            }
+                        }}
+                    /> :
+                    <span className={styles.tagText}>
+                        {customText}
+                    </span>}
             </div>
         </div>
 

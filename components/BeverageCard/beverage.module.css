@@ -52,3 +52,20 @@
 .tagIcon {
     float: left;
 }
+
+.tagIcon:hover {
+    cursor: pointer;
+}
+
+.addInput {
+    display: inline-block;
+    width: 60%;
+    background: #FFFFFF;
+    border: 1px solid #D4D4D8;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.addInput:focus{
+    outline: none;
+  }
