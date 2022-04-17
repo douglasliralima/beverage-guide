@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "mobx": "^6.5.0",
     "mobx-react": "^7.3.0",
     "next": "12.1.5",

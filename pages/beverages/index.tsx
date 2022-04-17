@@ -5,12 +5,13 @@ import Link from 'next/link';
 import Image from 'next/image'
 
 import styles from "../../styles/Beverages.module.css";
-
-
+import OpenBreweryService from '../../service/OpenBreweryService';
 import { getUserstore } from '../../store/user';
 
 const Beverages: NextPage = () => {
     const store = getUserstore();
+    const service = new OpenBreweryService();
+    service.list().then((value) => console.log(value))
     return useObserver(() => (
         <div>
             <header className={styles.beverageHeader}>
