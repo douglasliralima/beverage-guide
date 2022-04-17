@@ -1,6 +1,6 @@
 import { observable, action, makeObservable } from 'mobx';
 
-interface beverage extends Object {
+export interface beverage extends Object {
   id: number,
   name: string,
   brewery_type: string,
