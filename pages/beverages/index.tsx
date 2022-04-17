@@ -28,7 +28,7 @@ const Beverages: NextPage = () => {
                         <a>
                             <div className={styles.imageVector}>
                                 <Image
-                                    src="/beverages/vector.png"
+                                    src="/pages/beverages/goBack.png"
                                     width={38.4}
                                     height={38.4}
                                     alt="Go back icon"
