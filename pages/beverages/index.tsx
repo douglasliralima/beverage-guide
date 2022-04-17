@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { useObserver } from 'mobx-react';
 import type { NextPage } from 'next';
 
@@ -11,7 +13,11 @@ import { getUserstore } from '../../store/user';
 const Beverages: NextPage = () => {
     const store = getUserstore();
     const service = new OpenBreweryService();
-    service.list().then((value) => console.log(value))
+    
+    useEffect(() => {
+        service.list().then((value) => store.setBeverages(value.data))
+    })
+
     return useObserver(() => (
         <div>
             <header className={styles.beverageHeader}>
@@ -42,7 +48,13 @@ const Beverages: NextPage = () => {
             </header>
 
             <main className={styles.beverageMain}>
-                <span>Hello World Card</span>
+                {store.beverages && store.beverages.map((value) => <div style={{border:"1px solid #A1A1AA", display:"inline-block"}}>
+                    <p>{value.name}</p>
+                    <p>{`${value.street} - ${value.country}`}</p>
+                    <p>{value.brewery_type}</p>
+                    <p>{value.postal_code}</p>
+                    <p>{value.phone}</p>
+                </div>)}
             </main>
         </div>
     ));
