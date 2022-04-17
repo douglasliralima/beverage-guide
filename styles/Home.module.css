@@ -31,7 +31,10 @@
   padding-left: 0.5rem;
   display: flex;
   align-items: center;
-  color: #71717A;
+}
+
+.input:focus{
+  outline: none;
 }
 
 .checkbox {

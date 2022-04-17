@@ -1,0 +1,39 @@
+.beverageHeader {
+    background: #F2EC54;
+}
+
+.headerText {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 150%;
+    color: #000000;
+    padding: 8px 16px;
+    vertical-align: middle;
+}
+
+.imageVector {
+    margin-left: 2%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.inlineDiv {
+    display: inline-block;
+}
+
+.headerReturn {
+    width: 50%;
+    padding-left: 0.5%;
+}
+
+.headerName {
+    float: right;
+    padding-left: 0.5%;
+}
+
+.beverageMain {
+    min-height: 100vh;
+    background: #FFFEF0;
+}
