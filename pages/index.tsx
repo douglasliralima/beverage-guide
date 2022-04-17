@@ -14,7 +14,9 @@ const Home: NextPage = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push("/beverages");
+    if (store.name && store.legalAge) {
+      router.push("/beverages");
+    }
   }
 
   return useObserver(() => (
@@ -46,7 +48,9 @@ const Home: NextPage = () => {
           <input type="submit" value="Enter" className={styles.text + " " + styles.submitButton}
             style={store.name && store.legalAge ? {
               background: '#5D5FEF'
-            } : {}} />
+            } : {
+              cursor: "not-allowed"
+            }} />
 
 
         </form>
