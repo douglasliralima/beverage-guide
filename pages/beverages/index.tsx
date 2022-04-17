@@ -6,6 +6,7 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import Image from 'next/image'
 
+import BeverageCard from '../../components/BeverageCard/BeverageCard';
 import styles from "../../styles/Beverages.module.css";
 import OpenBreweryService from '../../service/OpenBreweryService';
 import { getUserstore } from '../../store/user';
@@ -13,7 +14,7 @@ import { getUserstore } from '../../store/user';
 const Beverages: NextPage = () => {
     const store = getUserstore();
     const service = new OpenBreweryService();
-    
+
     useEffect(() => {
         service.list().then((value) => store.setBeverages(value.data))
     })
@@ -25,7 +26,7 @@ const Beverages: NextPage = () => {
                 <div className={`${styles.headerReturn} ${styles.inlineDiv}`}>
                     <Link href="/">
                         <a>
-                            <div className={styles.imageVector}> 
+                            <div className={styles.imageVector}>
                                 <Image
                                     src="/beverages/vector.png"
                                     width={38.4}
@@ -48,14 +49,8 @@ const Beverages: NextPage = () => {
             </header>
 
             <main className={styles.beverageMain}>
-                {store.beverages && store.beverages.map((value) => 
-                <div key={value.id} style={{border:"1px solid #A1A1AA", display:"inline-block"}}>
-                    <p>{value.name}</p>
-                    <p>{`${value.street} - ${value.country}`}</p>
-                    <p>{value.brewery_type}</p>
-                    <p>{value.postal_code}</p>
-                    <p>{value.phone}</p>
-                </div>)}
+                {store.beverages &&
+                    store.beverages.map((value) => <BeverageCard {...value} />)}
             </main>
         </div>
     ));
