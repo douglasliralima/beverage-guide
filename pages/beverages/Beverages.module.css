@@ -37,3 +37,16 @@
     min-height: 100vh;
     background: #FFFEF0;
 }
+
+.beverageRow {
+    display: flex;
+    gap: 2%;
+    flex-wrap: wrap;
+}
+
+.flexThreeItems {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 28%;
+}

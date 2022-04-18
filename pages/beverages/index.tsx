@@ -1,22 +1,34 @@
 import { useEffect } from 'react';
 
 import { Observer } from 'mobx-react';
-import type { NextPage } from 'next';
+import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 
 import Link from 'next/link';
 import Image from 'next/image'
 
+
+import type { beverage } from '../../store/user';
 import BeverageCard from '../../components/BeverageCard/BeverageCard';
-import styles from "../../styles/Beverages.module.css";
+import styles from "./Beverages.module.css";
 import OpenBreweryService from '../../service/OpenBreweryService';
 import { getUserStore } from '../../store/user';
 
-const Beverages: NextPage = () => {
-    const store = getUserStore();
+export const getStaticProps: GetStaticProps = async () => {
     const service = new OpenBreweryService();
+    const beverages: beverage = (await service.list()).data
+
+    return {
+        props: {
+            beverages,
+        },
+    }
+}
+
+const Beverages: NextPage = ({ beverages }: InferGetStaticPropsType<typeof getStaticProps>) => {
+    const store = getUserStore();
 
     useEffect(() => {
-        service.list().then((value) => store.setBeverages(value.data))
+        store.setBeverages(beverages)
     })
 
     return <Observer>
@@ -50,8 +62,14 @@ const Beverages: NextPage = () => {
                 </header>
 
                 <main className={styles.beverageMain}>
-                    {store.beverages &&
-                        store.beverages.map((value) => <BeverageCard key={value.id} {...value} />)}
+                    <div className={styles.beverageRow}>
+                        {store.beverages &&
+                            store.beverages.map((value) =>
+                                <div key={value.id} className={styles.flexThreeItems}>
+                                    <BeverageCard {...value} />
+                                </div>
+                            )}
+                    </div>
                 </main>
             </div>
         )}
