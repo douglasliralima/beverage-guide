@@ -5,7 +5,7 @@
     border-radius: 4px;
     display: inline-block;
     Width: 382px;
-    Height: 282px;
+    min-height: 282px;
     margin: 16px;
     padding-left: 24px;
 }

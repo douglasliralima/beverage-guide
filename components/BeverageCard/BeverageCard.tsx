@@ -9,38 +9,37 @@ import styles from "./beverage.module.css"
 
 const BeverageCard: NextPage<beverage> = (props) => {
     const store = getUserStore();
+
+    const [customTags, setCustomTags] = useState<Array<string>>([]);
     const [addEvent, setAddEvent] = useState(false);
-    const [customText, setCustomText] = useState("add more");
+    const [addText, setAddText] = useState("add more");
     const wrapperRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        const handleClickOutside = (event: any, customText: string) => {
+        const handleClickOutside = (event: any) => {
             if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-                if (customText === "add more") {
-                    setCustomText("")
-                }
-                else if (customText === "") {
-                    setCustomText("add more")
-                } else {
-                    setCustomText(customText)
-                }
-                setAddEvent(!addEvent)
+                setAddText("add more");
+                setAddEvent(false)
             }
         };
 
         if (addEvent === true) {
-            document.addEventListener("click", (e) => handleClickOutside(e, customText), false);
+            document.addEventListener("click", (e) => handleClickOutside(e), false);
         } else {
-            document.removeEventListener("click", (e) => handleClickOutside(e, customText), false);
+            document.removeEventListener("click", (e) => handleClickOutside(e), false);
         }
-    }, [addEvent, customText]);
+    }, [addEvent]);
 
     const handleSubmit = () => {
-        if (customText === "add more") {
-            setCustomText("")
+        if (addText === "add more") {
+            setAddText("")
         }
-        else if (customText === "") {
-            setCustomText("add more")
+        else if (addText === "") {
+            setAddText("add more")
+        } else {
+            customTags.push(addText);
+            setCustomTags(customTags);
+            setAddText("add more");
         }
         setAddEvent(!addEvent)
     }
@@ -113,6 +112,21 @@ const BeverageCard: NextPage<beverage> = (props) => {
                         {props.phone}
                     </span>
                 </div>
+
+                {customTags.map((tagValue) => <div className={styles.cardTags}>
+                    <div className={styles.tagIcon}>
+                        <Image
+                            src="/components/beverageCard/add.png"
+                            width={18}
+                            height={16}
+                            alt="add icon"
+                        />
+                    </div>
+                    <span className={styles.tagText}>
+                        {tagValue}
+                    </span>
+                </div>)}
+
                 <div
                     id={`${props.id}-add-tag`}
                     ref={wrapperRef}
@@ -123,14 +137,14 @@ const BeverageCard: NextPage<beverage> = (props) => {
                             src={`/components/beverageCard/${addEvent ? "add" : "more"}.png`}
                             width={18}
                             height={16}
-                            alt="more icon"
+                            alt={`${addEvent ? "add" : "more"} icon`}
                             onClick={handleSubmit}
                         />
                     </div>
                     {addEvent ?
                         <input className={styles.addInput}
-                            value={customText}
-                            onChange={(e) => setCustomText(e.target.value)}
+                            value={addText}
+                            onChange={(e) => setAddText(e.target.value)}
                             onKeyDown={(e) => {
                                 if (e.key === "Enter") {
                                     handleSubmit();
@@ -138,9 +152,10 @@ const BeverageCard: NextPage<beverage> = (props) => {
                             }}
                         /> :
                         <span className={styles.tagText}>
-                            {customText}
+                            {addText}
                         </span>}
                 </div>
+
             </div>
 
         </div>}
