@@ -1,11 +1,14 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import { Observer } from 'mobx-react';
 import { useEffect, useRef, useState } from 'react';
 
 import type { beverage } from '../../store/user';
+import { getUserStore } from '../../store/user';
 import styles from "./beverage.module.css"
 
 const BeverageCard: NextPage<beverage> = (props) => {
+    const store = getUserStore();
     const [addEvent, setAddEvent] = useState(false);
     const [customText, setCustomText] = useState("add more");
     const wrapperRef = useRef<HTMLInputElement>(null);
@@ -25,7 +28,7 @@ const BeverageCard: NextPage<beverage> = (props) => {
             }
         };
 
-        if(addEvent === true) {
+        if (addEvent === true) {
             document.addEventListener("click", (e) => handleClickOutside(e, customText), false);
         } else {
             document.removeEventListener("click", (e) => handleClickOutside(e, customText), false);
@@ -42,92 +45,106 @@ const BeverageCard: NextPage<beverage> = (props) => {
         setAddEvent(!addEvent)
     }
 
-    return <div className={styles.card}>
+    return <Observer>
+        {() => <div className={styles.card}>
 
-        <p className={styles.cardTitle}>
-            {props.name}
-        </p>
+            <div className={styles.trashIcon}>
+                <Image
+                    src="/components/beverageCard/trash.png"
+                    width={10}
+                    height={14}
+                    alt="trash"
+                    onClick={() => store.deleteBeverageById(props.id)}
+                />
+            </div>
 
-        <div className='adress'>
-            <p className={styles.cardAdress}>
-                {props.street}
+            <p className={styles.cardTitle}>
+                {props.name}
             </p>
-            <p className={styles.cardAdress}>
-                {`${props.city}, ${props.state} - ${props.country}`}
-            </p>
-        </div>
 
-        <div className='tags'>
-            <div className={styles.cardTags}>
-                <div className={styles.tagIcon}>
-                    <Image
-                        src="/components/beverageCard/brewery_type.png"
-                        width={18}
-                        height={16}
-                        alt="brewery type icon"
-                    />
-                </div>
-                <span className={styles.tagText}>
-                    {props.brewery_type}
-                </span>
+
+
+            <div className='adress'>
+                <p className={styles.cardAdress}>
+                    {props.street}
+                </p>
+                <p className={styles.cardAdress}>
+                    {`${props.city}, ${props.state} - ${props.country}`}
+                </p>
             </div>
-            <div className={styles.cardTags}>
-                <div className={styles.tagIcon}>
-                    <Image
-                        src="/components/beverageCard/location.png"
-                        width={16}
-                        height={18}
-                        alt="location icon"
-                    />
-                </div>
-                <span className={styles.tagText}>
-                    {props.postal_code}
-                </span>
-            </div>
-            <div className={styles.cardTags}>
-                <div className={styles.tagIcon}>
-                    <Image
-                        src="/components/beverageCard/phone.png"
-                        width={18}
-                        height={16}
-                        alt="phone icon"
-                    />
-                </div>
-                <span className={styles.tagText}>
-                    {props.phone}
-                </span>
-            </div>
-            <div
-                id={`${props.id}-add-tag`}
-                ref={wrapperRef}
-                className={styles.cardTags}
-            >
-                <div className={styles.tagIcon}>
-                    <Image
-                        src={`/components/beverageCard/${addEvent ? "add" : "more"}.png`}
-                        width={18}
-                        height={16}
-                        alt="more icon"
-                        onClick={handleSubmit}
-                    />
-                </div>
-                {addEvent ?
-                    <input className={styles.addInput}
-                        value={customText}
-                        onChange={(e) => setCustomText(e.target.value)}
-                        onKeyDown={(e) => {
-                            if (e.key === "Enter") {
-                                handleSubmit();
-                            }
-                        }}
-                    /> :
+
+            <div className='tags'>
+                <div className={styles.cardTags}>
+                    <div className={styles.tagIcon}>
+                        <Image
+                            src="/components/beverageCard/brewery_type.png"
+                            width={18}
+                            height={16}
+                            alt="brewery type icon"
+                        />
+                    </div>
                     <span className={styles.tagText}>
-                        {customText}
-                    </span>}
+                        {props.brewery_type}
+                    </span>
+                </div>
+                <div className={styles.cardTags}>
+                    <div className={styles.tagIcon}>
+                        <Image
+                            src="/components/beverageCard/location.png"
+                            width={16}
+                            height={18}
+                            alt="location icon"
+                        />
+                    </div>
+                    <span className={styles.tagText}>
+                        {props.postal_code}
+                    </span>
+                </div>
+                <div className={styles.cardTags}>
+                    <div className={styles.tagIcon}>
+                        <Image
+                            src="/components/beverageCard/phone.png"
+                            width={18}
+                            height={16}
+                            alt="phone icon"
+                        />
+                    </div>
+                    <span className={styles.tagText}>
+                        {props.phone}
+                    </span>
+                </div>
+                <div
+                    id={`${props.id}-add-tag`}
+                    ref={wrapperRef}
+                    className={styles.cardTags}
+                >
+                    <div className={styles.tagIcon}>
+                        <Image
+                            src={`/components/beverageCard/${addEvent ? "add" : "more"}.png`}
+                            width={18}
+                            height={16}
+                            alt="more icon"
+                            onClick={handleSubmit}
+                        />
+                    </div>
+                    {addEvent ?
+                        <input className={styles.addInput}
+                            value={customText}
+                            onChange={(e) => setCustomText(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    handleSubmit();
+                                }
+                            }}
+                        /> :
+                        <span className={styles.tagText}>
+                            {customText}
+                        </span>}
+                </div>
             </div>
-        </div>
 
-    </div>
+        </div>}
+    </Observer>
 }
 
 export default BeverageCard;

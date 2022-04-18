@@ -10,6 +10,12 @@
     padding-left: 24px;
 }
 
+.trashIcon {
+    float: right;
+    margin: 0.8rem;
+    cursor: pointer;
+}
+
 .cardTitle {
     font-family: 'Work Sans';
     font-style: normal;
@@ -66,6 +72,6 @@
     border-radius: 4px;
 }
 
-.addInput:focus{
+.addInput:focus {
     outline: none;
-  }
+}
