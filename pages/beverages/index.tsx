@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image'
 
 import BeverageCard from '../../components/BeverageCard/BeverageCard';
-import styles from "../../styles/Beverages.module.css";
+import styles from "./Beverages.module.css";
 import OpenBreweryService from '../../service/OpenBreweryService';
 import { getUserStore } from '../../store/user';
 
@@ -50,8 +50,14 @@ const Beverages: NextPage = () => {
                 </header>
 
                 <main className={styles.beverageMain}>
-                    {store.beverages &&
-                        store.beverages.map((value) => <BeverageCard key={value.id} {...value} />)}
+                    <div className={styles.beverageRow}>
+                        {store.beverages &&
+                            store.beverages.map((value) =>
+                                <div key={value.id} className={styles.flexThreeItems}>
+                                    <BeverageCard {...value} />
+                                </div>
+                            )}
+                    </div>
                 </main>
             </div>
         )}
