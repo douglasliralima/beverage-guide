@@ -118,7 +118,7 @@ const BeverageCard: NextPage<beverage> = (props) => {
                     ref={wrapperRef}
                     className={styles.cardTags}
                 >
-                    <div className={styles.tagIcon}>
+                    <div className={`${styles.tagIcon} ${styles.addIcon}`}>
                         <Image
                             src={`/components/beverageCard/${addEvent ? "add" : "more"}.png`}
                             width={18}
