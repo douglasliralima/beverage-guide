@@ -5,9 +5,15 @@
     border-radius: 4px;
     display: inline-block;
     Width: 382px;
-    Height: 282px;
+    min-height: 282px;
     margin: 16px;
     padding-left: 24px;
+}
+
+.trashIcon {
+    float: right;
+    margin: 0.8rem;
+    cursor: pointer;
 }
 
 .cardTitle {
@@ -31,13 +37,15 @@
 }
 
 .cardTags {
-    display: inline-block;
+    display: inline-flex;
     background: #F2EC54;
     border-radius: 99px;
-    width: 130px;
+    padding-right: 10px;
+    min-width: 100px;
     height: 32px;
     margin: 8px 8px;
-    text-align: center;
+    vertical-align: middle;
+    gap: 5px;
 }
 
 .tagText {
@@ -50,22 +58,26 @@
 }
 
 .tagIcon {
-    float: left;
+    margin: auto 0 auto 8px;
+    transform: translate(0, 4%);
 }
 
-.tagIcon:hover {
+.addIcon:hover {
     cursor: pointer;
 }
 
 .addInput {
+    margin: auto 0;
     display: inline-block;
-    width: 60%;
+    height: 60%;
+    width: 100px;
+    margin-right: 20px;
     background: #FFFFFF;
     border: 1px solid #D4D4D8;
     box-sizing: border-box;
     border-radius: 4px;
 }
 
-.addInput:focus{
+.addInput:focus {
     outline: none;
-  }
+}

@@ -9,10 +9,10 @@ import Image from 'next/image'
 import BeverageCard from '../../components/BeverageCard/BeverageCard';
 import styles from "../../styles/Beverages.module.css";
 import OpenBreweryService from '../../service/OpenBreweryService';
-import { getUserstore } from '../../store/user';
+import { getUserStore } from '../../store/user';
 
 const Beverages: NextPage = () => {
-    const store = getUserstore();
+    const store = getUserStore();
     const service = new OpenBreweryService();
 
     useEffect(() => {

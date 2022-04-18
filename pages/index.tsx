@@ -5,12 +5,12 @@ import Image from 'next/image'
 import { FormEvent, useState } from 'react'
 import { Observer } from 'mobx-react'
 
-import { getUserstore } from '../store/user'
+import { getUserStore } from '../store/user'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
 
-  const store = getUserstore();
+  const store = getUserStore();
   const router = useRouter()
   const [nameError, setNameError] = useState<string | undefined>(undefined);
 

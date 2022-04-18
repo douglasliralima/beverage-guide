@@ -1,7 +1,7 @@
 import { observable, action, makeObservable } from 'mobx';
 
 export interface beverage extends Object {
-  id: number,
+  id: string,
   name: string,
   brewery_type: string,
   street: string,
@@ -38,7 +38,8 @@ class User {
       beverages: observable,
       setName:action,
       setLegalAge:action,
-      setBeverages:action
+      setBeverages:action,
+      deleteBeverageById:action
     })
   }
 
@@ -50,14 +51,18 @@ class User {
     this.legalAge = legalAge;
   }
 
-  public setBeverages(beverages:Array<Object>){
+  public setBeverages(beverages:Array<beverage>){
     this.beverages = beverages;
+  }
+
+  public deleteBeverageById(id: string){
+    this.beverages = this.beverages?.filter((beverage) => beverage.id !== id);
   }
 
 }
 
 let userStore: User;
-export function getUserstore(name: string = "", legalAge: boolean = false) {
+export function getUserStore(name: string = "", legalAge: boolean = false) {
   if (!userStore) {
     userStore = new User(name, legalAge);
   }
