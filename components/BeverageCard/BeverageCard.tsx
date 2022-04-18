@@ -113,19 +113,20 @@ const BeverageCard: NextPage<beverage> = (props) => {
                     </span>
                 </div>
 
-                {customTags.map((tagValue) => <div className={styles.cardTags}>
-                    <div className={styles.tagIcon}>
-                        <Image
-                            src="/components/beverageCard/add.png"
-                            width={18}
-                            height={16}
-                            alt="add icon"
-                        />
-                    </div>
-                    <span className={styles.tagText}>
-                        {tagValue}
-                    </span>
-                </div>)}
+                {customTags.map((tagValue, index) =>
+                    <div key={`${index}-custom-tag`} className={styles.cardTags}>
+                        <div className={styles.tagIcon}>
+                            <Image
+                                src="/components/beverageCard/add.png"
+                                width={18}
+                                height={16}
+                                alt="add icon"
+                            />
+                        </div>
+                        <span className={styles.tagText}>
+                            {tagValue}
+                        </span>
+                    </div>)}
 
                 <div
                     id={`${props.id}-add-tag`}
