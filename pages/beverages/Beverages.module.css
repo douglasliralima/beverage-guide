@@ -42,7 +42,6 @@
     display: flex;
     gap: 2%;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
 .flexThreeItems {
